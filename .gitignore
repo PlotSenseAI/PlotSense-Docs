@@ -1,0 +1,46 @@
+# Environment variables and sensitive files
+.env
+.env.local
+.env.development
+.env.production
+secrets.json
+config.json
+
+# API keys
+*api_key*
+*secret*
+*.key
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# GitBook generated files
+_book/
+.gitbook/
+
+# Temporary files
+*.tmp
+*.bak
+backup/
+*.backup
+
+# Log files
+*.log
+logs/
+
+# Cache files
+.cache/
+*.cache
