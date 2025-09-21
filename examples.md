@@ -8,6 +8,9 @@ This page provides comprehensive examples of using PlotSense for various data vi
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 
 # Create sample sales data
@@ -20,17 +23,17 @@ sales_data = {
 df = pd.DataFrame(sales_data)
 
 # Get AI recommendations
-suggestions = ps.recommender(df)
+suggestions = recommender(df)
 print("Top 3 recommendations:")
 for i in range(min(3, len(suggestions))):
     print(f"{i+1}. {suggestions.iloc[i]['description']}")
 
 # Generate the top recommendation
-plot = ps.plotgen(df, suggestions.iloc[0])
+plot = plotgen(df, suggestions.iloc[0])
 plot.show()
 
 # Get AI explanation
-explanation = ps.explainer(plot)
+explanation = explainer(plot)
 print(f"\\nInsight: {explanation}")
 ```
 
@@ -38,6 +41,9 @@ print(f"\\nInsight: {explanation}")
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 import numpy as np
 
@@ -56,15 +62,15 @@ customers['age'] = customers['age'].clip(18, 80)
 customers['income'] = customers['income'].clip(20000, 200000)
 
 # Get recommendations
-suggestions = ps.recommender(customers)
+suggestions = recommender(customers)
 
 # Generate multiple plots
 for i in range(3):
     print(f"\\n=== Visualization {i+1} ===")
-    plot = ps.plotgen(customers, suggestions.iloc[i])
+    plot = plotgen(customers, suggestions.iloc[i])
 
     # Custom explanation focusing on business insights
-    explanation = ps.explainer(
+    explanation = explainer(
         plot,
         custom_prompt="Explain this from a business strategy perspective"
     )
@@ -77,6 +83,9 @@ for i in range(3):
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 import numpy as np
 
@@ -101,13 +110,13 @@ website_data = pd.DataFrame({
 })
 
 # Get recommendations for time series
-suggestions = ps.recommender(website_data)
+suggestions = recommender(website_data)
 
 # Generate temporal visualization
-plot = ps.plotgen(website_data, suggestions.iloc[0])
+plot = plotgen(website_data, suggestions.iloc[0])
 
 # Get detailed explanation with multiple iterations
-explanation = ps.explainer(
+explanation = explainer(
     plot,
     custom_prompt="Analyze trends, patterns, and anomalies in this time series",
     iterations=2
@@ -119,6 +128,9 @@ print(f"Time Series Analysis: {explanation}")
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 
 # Compare different product categories
@@ -145,13 +157,13 @@ combined_data = pd.DataFrame({
 })
 
 # Get recommendations
-suggestions = ps.recommender(combined_data)
+suggestions = recommender(combined_data)
 
 # Generate comparison plot
-plot = ps.plotgen(combined_data, suggestions.iloc[0])
+plot = plotgen(combined_data, suggestions.iloc[0])
 
 # Get comparative analysis
-explanation = ps.explainer(
+explanation = explainer(
     plot,
     custom_prompt="Compare performance between quarters and identify winners/losers"
 )
@@ -164,6 +176,9 @@ print(f"Quarterly Comparison: {explanation}")
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 import numpy as np
 
@@ -186,13 +201,13 @@ experiments['reaction_rate'] = (
 )
 
 # Get scientific visualization recommendations
-suggestions = ps.recommender(experiments)
+suggestions = recommender(experiments)
 
 # Generate scientific plot
-plot = ps.plotgen(experiments, suggestions.iloc[0])
+plot = plotgen(experiments, suggestions.iloc[0])
 
 # Get scientific explanation
-explanation = ps.explainer(
+explanation = explainer(
     plot,
     custom_prompt="Explain the relationships and patterns from a scientific research perspective"
 )
@@ -203,6 +218,9 @@ print(f"Scientific Analysis: {explanation}")
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 import numpy as np
 
@@ -229,13 +247,13 @@ for symbol in portfolio['stock_symbol'].unique():
     portfolio.loc[mask, 'price'] = prices
 
 # Get financial recommendations
-suggestions = ps.recommender(portfolio)
+suggestions = recommender(portfolio)
 
 # Generate financial visualization
-plot = ps.plotgen(portfolio, suggestions.iloc[0])
+plot = plotgen(portfolio, suggestions.iloc[0])
 
 # Get financial analysis
-explanation = ps.explainer(
+explanation = explainer(
     plot,
     custom_prompt="Provide investment insights and risk analysis based on this data"
 )
@@ -248,6 +266,9 @@ print(f"Investment Analysis: {explanation}")
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 
 # Sample data
@@ -258,10 +279,10 @@ df = pd.DataFrame({
 })
 
 # Get recommendations
-suggestions = ps.recommender(df)
+suggestions = recommender(df)
 
 # Generate plot with custom styling
-plot = ps.plotgen(
+plot = plotgen(
     df,
     suggestions.iloc[0],
     figsize=(12, 8),
@@ -280,6 +301,9 @@ plot.savefig("custom_plot.png", dpi=300, bbox_inches='tight')
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 
 # Sample data
@@ -300,10 +324,10 @@ custom_rec = {
 }
 
 # Generate plot from custom recommendation
-plot = ps.plotgen(df, custom_rec)
+plot = plotgen(df, custom_rec)
 
 # Get explanation
-explanation = ps.explainer(plot, "Analyze the relationship between physical attributes")
+explanation = explainer(plot, "Analyze the relationship between physical attributes")
 print(f"Custom Analysis: {explanation}")
 ```
 
@@ -313,6 +337,9 @@ print(f"Custom Analysis: {explanation}")
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -325,7 +352,7 @@ df = pd.DataFrame({
 })
 
 # Get multiple recommendations
-suggestions = ps.recommender(df)
+suggestions = recommender(df)
 
 # Create subplot comparison
 fig, axes = plt.subplots(2, 2, figsize=(15, 12))
@@ -335,13 +362,13 @@ for i in range(min(4, len(suggestions))):
     row, col = i // 2, i % 2
 
     # Generate individual plots
-    plot = ps.plotgen(df, suggestions.iloc[i])
+    plot = plotgen(df, suggestions.iloc[i])
 
     # Copy to subplot (simplified - actual implementation may vary)
     axes[row, col].set_title(f"Recommendation {i+1}: {suggestions.iloc[i]['description']}")
 
     # Get explanation for each
-    explanation = ps.explainer(plot)
+    explanation = explainer(plot)
     print(f"Plot {i+1}: {explanation[:100]}...")
 
 plt.tight_layout()
@@ -352,6 +379,9 @@ plt.show()
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 import time
 
@@ -378,11 +408,11 @@ def simulate_real_time_data():
 
         # Get recommendations for current data
         if len(streaming_data) >= 3:  # Need minimum data for recommendations
-            suggestions = ps.recommender(streaming_data)
-            plot = ps.plotgen(streaming_data, suggestions.iloc[0])
+            suggestions = recommender(streaming_data)
+            plot = plotgen(streaming_data, suggestions.iloc[0])
 
             # Quick analysis
-            explanation = ps.explainer(
+            explanation = explainer(
                 plot,
                 "Provide real-time monitoring insights and any alerts"
             )
@@ -400,6 +430,9 @@ def simulate_real_time_data():
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 import numpy as np
 
@@ -427,16 +460,16 @@ def analyze_with_quality_checks(df):
 
     # Get recommendations
     try:
-        suggestions = ps.recommender(df_clean)
+        suggestions = recommender(df_clean)
 
         if len(suggestions) > 0:
             print(f"\\n=== Generated {len(suggestions)} recommendations ===")
 
             # Generate best visualization
-            plot = ps.plotgen(df_clean, suggestions.iloc[0])
+            plot = plotgen(df_clean, suggestions.iloc[0])
 
             # Get comprehensive explanation
-            explanation = ps.explainer(
+            explanation = explainer(
                 plot,
                 "Provide comprehensive analysis including data quality observations"
             )
@@ -465,6 +498,9 @@ analyze_with_quality_checks(sample_data)
 ```python
 # In Jupyter Notebook
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 from IPython.display import display, HTML
 
@@ -480,17 +516,17 @@ display(df.head())
 display(df.describe())
 
 # Get and display recommendations
-suggestions = ps.recommender(df)
+suggestions = recommender(df)
 display(HTML("<h3>AI Recommendations</h3>"))
 display(suggestions)
 
 # Generate interactive plot selection
 for i, suggestion in suggestions.iterrows():
-    plot = ps.plotgen(df, suggestion)
+    plot = plotgen(df, suggestion)
     display(HTML(f"<h4>Recommendation {i+1}: {suggestion['description']}</h4>"))
     display(plot)
 
-    explanation = ps.explainer(plot)
+    explanation = explainer(plot)
     display(HTML(f"<p><strong>Analysis:</strong> {explanation}</p>"))
     display(HTML("<hr>"))
 ```
@@ -501,6 +537,9 @@ for i, suggestion in suggestions.iterrows():
 # Flask web application example
 from flask import Flask, render_template, request, jsonify
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 import io
 import base64
@@ -515,10 +554,10 @@ def analyze_data():
         df = pd.read_csv(file)
 
         # Get recommendations
-        suggestions = ps.recommender(df)
+        suggestions = recommender(df)
 
         # Generate plot
-        plot = ps.plotgen(df, suggestions.iloc[0])
+        plot = plotgen(df, suggestions.iloc[0])
 
         # Convert plot to base64 for web display
         img_buffer = io.BytesIO()
@@ -527,7 +566,7 @@ def analyze_data():
         img_str = base64.b64encode(img_buffer.getvalue()).decode()
 
         # Get explanation
-        explanation = ps.explainer(plot)
+        explanation = explainer(plot)
 
         return jsonify({
             'success': True,
