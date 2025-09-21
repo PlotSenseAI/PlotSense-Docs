@@ -68,11 +68,14 @@ ps.set_api_key("your-api-key-here")
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 
 # Configure at runtime with context manager
 with ps.api_key_context("your-api-key-here"):
-    suggestions = ps.recommender(df)
-    plot = ps.plotgen(df, suggestions.iloc[0])
+    suggestions = recommender(df)
+    plot = plotgen(df, suggestions.iloc[0])
 ```
 
 ## Global Configuration
