@@ -36,6 +36,11 @@ Before contributing, ensure you have:
 
    # Install pre-commit hooks
    pre-commit install
+
+   # import modules
+   from plotsense import recommender
+   from plotsense import plotgen
+   from plotsense import explainer
    ```
 
 4. **Set Up API Key**
@@ -70,7 +75,7 @@ Clear description of the bug
 Steps to reproduce the behavior:
 1. Import PlotSense
 2. Load data: `df = pd.read_csv('example.csv')`
-3. Call function: `ps.recommender(df)`
+3. Call function: `recommender(df)`
 4. See error
 
 **Expected Behavior**
@@ -227,8 +232,8 @@ def explainer(plot: Figure, custom_prompt: Optional[str] = None) -> str:
         ValueError: If the plot parameter is invalid
 
     Example:
-        >>> plot = ps.plotgen(df, suggestion)
-        >>> explanation = ps.explainer(plot)
+        >>> plot = plotgen(df, suggestion)
+        >>> explanation = explainer(plot)
         >>> print(explanation)
         "This scatter plot shows a positive correlation between x and y..."
     """
@@ -360,9 +365,10 @@ Brief description of what the function does.
 
 ```python
 import plotsense as ps
+from plotsense import function_name
 
 # Simple example
-result = ps.function_name(data)
+result = function_name(data)
 print(result)
 ```
 
