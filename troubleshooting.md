@@ -103,9 +103,13 @@ api_key = os.getenv("GROQ_API_KEY").strip()
 # Solutions:
 # 1. Add delays between requests
 import time
-suggestions = ps.recommender(df)
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
+
+suggestions = recommender(df)
 time.sleep(1)  # Wait 1 second
-plot = ps.plotgen(df, suggestions.iloc[0])
+plot = plotgen(df, suggestions.iloc[0])
 
 # 2. Configure retry settings
 ps.configure(
@@ -204,7 +208,7 @@ df['category_col'] = df['category_col'].where(
 # 1. Sample large datasets
 if len(df) > 10000:
     df_sample = df.sample(n=5000, random_state=42)
-    suggestions = ps.recommender(df_sample)
+    suggestions = recommender(df_sample)
 
 # 2. Configure performance settings
 ps.configure(
@@ -263,7 +267,7 @@ matplotlib.use('TkAgg')  # or 'Qt5Agg', 'Agg'
 %matplotlib widget
 
 # 3. Explicitly show plots
-plot = ps.plotgen(df, suggestion)
+plot = plotgen(df, suggestion)
 plot.show()
 
 # 4. Save plot instead
@@ -275,7 +279,7 @@ plot.savefig('my_plot.png', dpi=300, bbox_inches='tight')
 ```python
 # Solutions:
 # 1. Customize plot parameters
-plot = ps.plotgen(
+plot = plotgen(
     df,
     suggestion,
     figsize=(12, 8),
@@ -292,7 +296,7 @@ ps.configure(
 
 # 3. Post-process the plot
 import matplotlib.pyplot as plt
-plot = ps.plotgen(df, suggestion)
+plot = plotgen(df, suggestion)
 plt.tight_layout()
 plt.grid(True, alpha=0.3)
 plt.show()
@@ -305,13 +309,13 @@ plt.show()
 ```python
 # Solutions:
 # 1. Use custom prompts
-explanation = ps.explainer(
+explanation = explainer(
     plot,
     custom_prompt="Focus on business insights and actionable recommendations"
 )
 
 # 2. Use multiple iterations
-explanation = ps.explainer(
+explanation = explainer(
     plot,
     custom_prompt="Provide detailed statistical analysis",
     iterations=2
@@ -325,7 +329,7 @@ Analyze this healthcare data visualization focusing on:
 - Clinical implications
 - Recommendations for healthcare providers
 """
-explanation = ps.explainer(plot, custom_prompt=domain_prompt)
+explanation = explainer(plot, custom_prompt=domain_prompt)
 ```
 
 ### Problem: Explanation generation fails
@@ -350,7 +354,7 @@ simple_suggestion = {
     'x_column': 'simple_x',
     'y_column': 'simple_y'
 }
-simple_plot = ps.plotgen(df[['simple_x', 'simple_y']], simple_suggestion)
+simple_plot = plotgen(df[['simple_x', 'simple_y']], simple_suggestion)
 
 # 3. Check plot object
 if plot is None:
@@ -397,12 +401,12 @@ def process_large_dataset(df, chunk_size=1000):
     results = []
     for i in range(0, len(df), chunk_size):
         chunk = df.iloc[i:i+chunk_size]
-        suggestions = ps.recommender(chunk)
+        suggestions = recommender(chunk)
         results.append(suggestions)
     return pd.concat(results, ignore_index=True)
 
 # 2. Clean up plot objects
-plot = ps.plotgen(df, suggestion)
+plot = plotgen(df, suggestion)
 # Use the plot
 plot.show()
 # Clean up
@@ -503,7 +507,7 @@ ps.configure(
 
 # Run with debug info
 try:
-    suggestions = ps.recommender(df)
+    suggestions = recommender(df)
     print(f"Generated {len(suggestions)} suggestions")
 except Exception as e:
     print(f"Error: {e}")
@@ -541,6 +545,9 @@ if api_key:
 
 ```python
 import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 import numpy as np
 
@@ -556,16 +563,16 @@ def test_plotsense_installation():
         print("✓ Test data created successfully")
 
         # Test recommendations
-        suggestions = ps.recommender(df)
+        suggestions = recommender(df)
         print(f"✓ Generated {len(suggestions)} recommendations")
 
         # Test plot generation
         if len(suggestions) > 0:
-            plot = ps.plotgen(df, suggestions.iloc[0])
+            plot = plotgen(df, suggestions.iloc[0])
             print("✓ Plot generated successfully")
 
             # Test explanation
-            explanation = ps.explainer(plot)
+            explanation = explainer(plot)
             print("✓ Explanation generated successfully")
             print(f"Sample explanation: {explanation[:100]}...")
 
