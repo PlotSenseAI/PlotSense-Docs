@@ -135,13 +135,14 @@ load_dotenv()
 Verify your installation by running:
 
 ```python
-import plotsense as ps
-print(f"PlotSense version: {ps.__version__}")
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 
 # Test with sample data
 import pandas as pd
 df = pd.DataFrame({'x': [1, 2, 3], 'y': [4, 5, 6]})
-suggestions = ps.recommender(df)
+suggestions = recommender(df)
 print(f"Found {len(suggestions)} suggestions")
 ```
 
