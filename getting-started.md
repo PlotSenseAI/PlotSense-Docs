@@ -41,7 +41,9 @@ You can configure your API key in several ways:
 Let's create your first AI-powered visualization:
 
 ```python
-import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 
 # Create sample data
@@ -54,16 +56,16 @@ df = pd.DataFrame(data)
 
 # Step 1: Get AI recommendations
 print("Getting AI recommendations...")
-suggestions = ps.recommender(df)
+suggestions = recommender(df)
 print(f"Found {len(suggestions)} visualization suggestions")
 
 # Step 2: Generate a plot from the first suggestion
 print("Generating plot...")
-plot = ps.plotgen(df, suggestions.iloc[0])
+plot = plotgen(df, suggestions.iloc[0])
 
 # Step 3: Get AI explanation
 print("Getting AI explanation...")
-explanation = ps.explainer(plot)
+explanation = explainer(plot)
 print(f"Explanation: {explanation}")
 ```
 
@@ -71,17 +73,17 @@ print(f"Explanation: {explanation}")
 
 PlotSense follows a simple three-step workflow:
 
-### 1. **Recommender** (`ps.recommender()`)
+### 1. **Recommender** (`recommender()`)
 - Analyzes your dataset structure
 - Returns up to 10 visualization suggestions
 - Each suggestion includes plot type and recommended variables
 
-### 2. **Plot Generator** (`ps.plotgen()`)
+### 2. **Plot Generator** (`plotgen()`)
 - Takes your DataFrame and a recommendation
 - Generates the actual visualization
 - Returns a plot object you can display or save
 
-### 3. **Explainer** (`ps.explainer()`)
+### 3. **Explainer** (`explainer()`)
 - Analyzes your generated plot
 - Provides natural language insights
 - Helps you understand patterns in your data
@@ -91,14 +93,16 @@ PlotSense follows a simple three-step workflow:
 Here's how to use PlotSense with your own datasets:
 
 ```python
-import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 
 # Load your data
 df = pd.read_csv("your_dataset.csv")
 
 # Get recommendations
-suggestions = ps.recommender(df)
+suggestions = recommender(df)
 
 # Explore different suggestions
 for i, suggestion in suggestions.iterrows():
@@ -106,10 +110,10 @@ for i, suggestion in suggestions.iterrows():
 
 # Generate your preferred plot
 selected_suggestion = suggestions.iloc[0]  # or choose any index
-plot = ps.plotgen(df, selected_suggestion)
+plot = plotgen(df, selected_suggestion)
 
 # Get insights
-explanation = ps.explainer(plot)
+explanation = explainer(plot)
 print(explanation)
 ```
 
