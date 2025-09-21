@@ -27,11 +27,11 @@ plotsense.recommender(dataframe)
 
 **Example:**
 ```python
-import plotsense as ps
+from plotsense import recommender
 import pandas as pd
 
 df = pd.read_csv("sales_data.csv")
-suggestions = ps.recommender(df)
+suggestions = recommender(df)
 print(suggestions.head())
 ```
 
@@ -62,12 +62,12 @@ plotsense.plotgen(dataframe, suggestion, **kwargs)
 
 **Example:**
 ```python
-import plotsense as ps
+from plotsense import plotgen
 import pandas as pd
 
 df = pd.read_csv("data.csv")
-suggestions = ps.recommender(df)
-plot = ps.plotgen(df, suggestions.iloc[0])
+suggestions = recommender(df)
+plot = plotgen(df, suggestions.iloc[0])
 plot.show()
 ```
 
@@ -79,7 +79,7 @@ custom_suggestion = {
     'y_column': 'salary',
     'color_column': 'department'
 }
-plot = ps.plotgen(df, custom_suggestion)
+plot = plotgen(df, custom_suggestion)
 ```
 
 **Supported Plot Types:**
@@ -121,17 +121,17 @@ plotsense.explainer(plot, custom_prompt=None, iterations=1)
 
 **Example:**
 ```python
-import plotsense as ps
+from plotsense import explainer
 
 # Generate a plot
-plot = ps.plotgen(df, suggestion)
+plot = plotgen(df, suggestion)
 
 # Get basic explanation
-explanation = ps.explainer(plot)
+explanation = explainer(plot)
 print(explanation)
 
 # Get custom explanation
-custom_explanation = ps.explainer(
+custom_explanation = explainer(
     plot,
     custom_prompt="Focus on outliers and trends",
     iterations=2
@@ -142,10 +142,10 @@ print(custom_explanation)
 **Custom Prompt Examples:**
 ```python
 # Focus on specific aspects
-ps.explainer(plot, "Explain the correlation between variables")
-ps.explainer(plot, "Identify any outliers or anomalies")
-ps.explainer(plot, "Describe the distribution pattern")
-ps.explainer(plot, "Explain this chart for a business audience")
+explainer(plot, "Explain the correlation between variables")
+explainer(plot, "Identify any outliers or anomalies")
+explainer(plot, "Describe the distribution pattern")
+explainer(plot, "Explain this chart for a business audience")
 ```
 
 ---
