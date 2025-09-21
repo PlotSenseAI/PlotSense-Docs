@@ -27,20 +27,22 @@ PlotSense is an AI-powered assistant that transforms how you approach data visua
 ## Quick Start
 
 ```python
-import plotsense as ps
+from plotsense import recommender
+from plotsense import plotgen
+from plotsense import explainer
 import pandas as pd
 
 # Load your data
 df = pd.read_csv("your_data.csv")
 
 # Get AI recommendations
-suggestions = ps.recommender(df)
+suggestions = recommender(df)
 
 # Generate a plot
-plot = ps.plotgen(df, suggestions.iloc[0])
+plot = plotgen(df, suggestions.iloc[0])
 
 # Get AI explanation
-explanation = ps.explainer(plot)
+explanation = explainer(plot)
 print(explanation)
 ```
 
